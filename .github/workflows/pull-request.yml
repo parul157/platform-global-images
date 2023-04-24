@@ -62,20 +62,20 @@ jobs:
           echo "::set-output name=scan_summary::$scan_summary"
           echo "$scan_summary" > /tmp/$BRANCH/main.html;
 
-      - name: Push scan results to github pages
-        if: steps.changed-directories.outputs.any_changed == 'true'
-        run: |
-          mkdir /tmp/gh-pages && cd /tmp/gh-pages
-          git init && git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git checkout -b gh-pages
-          git pull origin gh-pages
-          git config --local user.email "scanner@peak.ai"
-          git config --local user.name "github-actions[bot]"
-          rm -rf $BRANCH
-          cp -R /tmp/$BRANCH $BRANCH
-          git add $BRANCH
-          git commit -m "Add file for ${BRANCH}"
-          git push origin gh-pages
+#       - name: Push scan results to github pages
+#         if: steps.changed-directories.outputs.any_changed == 'true'
+#         run: |
+#           mkdir /tmp/gh-pages && cd /tmp/gh-pages
+#           git init && git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+#           git checkout -b gh-pages
+#           git pull origin gh-pages
+#           git config --local user.email "scanner@peak.ai"
+#           git config --local user.name "github-actions[bot]"
+#           rm -rf $BRANCH
+#           cp -R /tmp/$BRANCH $BRANCH
+#           git add $BRANCH
+#           git commit -m "Add file for ${BRANCH}"
+#           git push origin gh-pages
 
       - name: Add comment to PR
         if: steps.changed-directories.outputs.any_changed == 'true'

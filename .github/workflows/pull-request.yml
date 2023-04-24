@@ -60,6 +60,7 @@ jobs:
           scan_summary="<table><tr><th>Image name</th><th>Critical</th><th>High</th><th>Medium</th><th>Low</th><th>Report</th></tr>"
           scan_summar="$scan_summary </table>"
           echo "::set-output name=scan_summary::$scan_summary"
+          echo "$scan_summary" > /tmp/$BRANCH/main.html;
 
       - name: Push scan results to github pages
         if: steps.changed-directories.outputs.any_changed == 'true'

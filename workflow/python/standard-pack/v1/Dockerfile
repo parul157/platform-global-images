@@ -1,4 +1,4 @@
-FROM python:3.8.13-slim-buster
+FROM python:3.9-slim-buster
 
 RUN apt-get update && \
   apt install curl dnsutils unzip git jq libpq-dev python-dev build-essential -y 
@@ -16,11 +16,10 @@ RUN pip install -r /tmp/requirements.txt
 # ----------------------------------------
 # Non-Root User Creation!
 # ----------------------------------------
-ARG PEAK_USER_ID
-ENV PEAK_USER_ID=$PEAK_USER_ID
+
 
 # Add a new user, this must have the UserId of PEAK_USER_ID
-RUN useradd -m -d /home/peak-user -u $PEAK_USER_ID peak-user
+RUN useradd -m -d /home/peak-user -u 8877 peak-user
 
 # Give the new user the permissions to the directory that it might need
 RUN chown -R peak-user:peak-user /home/peak-user
@@ -29,4 +28,4 @@ RUN chown -R peak-user:peak-user /home/peak-user
 WORKDIR /home/peak-user
 
 # Set the user as default for the container
-USER $PEAK_USER_ID
+USER 8877

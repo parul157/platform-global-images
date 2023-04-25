@@ -71,7 +71,14 @@ jobs:
           git pull origin gh-pages
           git config --local user.email "scanner@peak.ai"
           git config --local user.name "github-actions[bot]"
-          rm -rf $BRANCH || mkdir -p $BRANCH
+          
+          if [ -d $BRANCH ]
+          then
+            rm -rf $BRANCH
+          else
+            mkdir -p $BRANCH
+          fi
+          
           cp -R /tmp/$BRANCH $BRANCH
           git add $BRANCH
           git commit -m "Add file for ${BRANCH}"

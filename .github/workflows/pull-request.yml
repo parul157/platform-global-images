@@ -24,7 +24,7 @@ jobs:
 
       - name: Get changed directories
         id: changed-directories
-        uses: tj-actions/changed-files@v23
+        uses: tj-actions/changed-files@v35.9.2
         with:
           files_ignore: |
             *.md
